@@ -40,6 +40,25 @@ less install.sh && sh install.sh
 
 **Update:** run the install command again. **Uninstall:** `rm ~/.local/bin/phonepeek` (and `rm -r ~/.phonepeek` for HTTPS certificates).
 
+## Official source
+
+This repository, **[github.com/nkechr1s/phonepeek](https://github.com/nkechr1s/phonepeek)**, is the original and only official phonepeek. Official versions come only from:
+
+- the install command above, which downloads from this repository's [releases](https://github.com/nkechr1s/phonepeek/releases)
+- the [releases page](https://github.com/nkechr1s/phonepeek/releases) itself
+
+phonepeek is **not on npm yet**, nor on Homebrew, PyPI or any other package manager, app store or website. A "phonepeek" from anywhere else is not ours, even if its code or README looks identical, and it may contain malicious software.
+
+**Check that your copy is genuine.** Every official release is built by GitHub from this repository and carries a signed build record that a copy cannot fake:
+
+```sh
+gh attestation verify ~/.local/bin/phonepeek --repo nkechr1s/phonepeek
+```
+
+If this fails, delete that copy and install from the command above.
+
+Found a copy pretending to be phonepeek? Please [report it privately](https://github.com/nkechr1s/phonepeek/security/advisories/new).
+
 ## Usage
 
 ```sh
