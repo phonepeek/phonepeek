@@ -53,6 +53,17 @@ Start your dev server as usual, run phonepeek, scan the code. Your phone and com
 
 The link is **private**: it contains a secret that changes every run. Only a browser that opened it gets in; anyone else on the Wi-Fi gets `403 Forbidden`. If the Wi-Fi has no password, phonepeek warns you.
 
+## Use it from your AI coding agent
+
+Add the phonepeek skill, and Claude Code (or any agent that supports [skills](skills/phonepeek/SKILL.md)) will use it when you say things like *"show this on my phone"*. It picks the port, adds `--https` for checkout and camera pages, and stops phonepeek when you're done.
+
+```sh
+mkdir -p ~/.claude/skills/phonepeek
+curl -fsSL https://raw.githubusercontent.com/nkechr1s/phonepeek/main/skills/phonepeek/SKILL.md -o ~/.claude/skills/phonepeek/SKILL.md
+```
+
+It's one short Markdown file: [read it](skills/phonepeek/SKILL.md) before adding it.
+
 ## How it works
 
 phonepeek starts a small proxy on your Wi-Fi address that forwards to `localhost:<port>`:

@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- `skills/phonepeek/SKILL.md`: a skill so AI coding agents (Claude Code and others) can run phonepeek for you.
+- `AGENTS.md` / `CLAUDE.md`: project rules for AI agents working on the repo.
+
 ## 0.2.0
 
 - **Private link:** every run gets a secret link in the QR code. Other devices on the Wi-Fi get `403` and can't reach your app at all.

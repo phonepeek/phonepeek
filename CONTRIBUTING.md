@@ -17,7 +17,9 @@ node phonepeek.js 8000  # try it on a local server
 | `test/security/` | The pen test, automated: private link, headers, smuggling, robustness, TLS |
 | `test/e2e/` | The real CLI on your network address, and the installer |
 
-Every behavior change needs a test. Every security claim in the README or SECURITY.md must point to a test that proves it.
+Every behavior change needs a test.
+
+Using an AI agent? It should follow [`AGENTS.md`](AGENTS.md) (Claude Code reads it through `CLAUDE.md`). If you change what users see, update [`skills/phonepeek/SKILL.md`](skills/phonepeek/SKILL.md) too. Every security claim in the README or SECURITY.md must point to a test that proves it.
 
 ## Releasing (maintainers)
 
