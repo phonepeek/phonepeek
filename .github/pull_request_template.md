@@ -1,6 +1,7 @@
 ## What and why
 
 ## Checklist
-- [ ] `node --test test.js` passes
+- [ ] `node --test` passes
 - [ ] Still a single file with zero dependencies
-- [ ] README updated if behavior changed
+- [ ] New behavior has a test; security claims point to a test
+- [ ] README / SECURITY.md updated if behavior changed
