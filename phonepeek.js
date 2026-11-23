@@ -36,12 +36,20 @@ function createProxy(targetPort) {
 
     // On the phone, "localhost" is the phone itself: point absolute links/redirects back through us.
     const phoneHost = req.headers.host;
+    const phoneOrigin = `http://${phoneHost}`;
     const toPhone = (s) => s.replace(localUrl, (_, slash) => `http:${slash}${slash}${phoneHost}`);
+    // Same-site Referer as the app would see it on localhost (some CSRF checks compare it).
+    if (headers.referer && (headers.referer === phoneOrigin || headers.referer.startsWith(`${phoneOrigin}/`))) {
+      headers.referer = `http://${local}${headers.referer.slice(phoneOrigin.length)}`;
+    }
 
     const upstream = http.request(
       { host: 'localhost', port: targetPort, method: req.method, path: req.url, headers },
       (up) => {
-        if (up.headers.location) up.headers.location = toPhone(up.headers.location);
+        // Every header, not just Location: X-Inertia-Location, Link preloads, Refresh, CSP...
+        for (const [k, v] of Object.entries(up.headers)) {
+          up.headers[k] = Array.isArray(v) ? v.map(toPhone) : typeof v === 'string' ? toPhone(v) : v;
+        }
         // shortcut: text bodies are buffered to rewrite links, so streamed HTML arrives all at once.
         if (!TEXT.test(up.headers['content-type'] || '')) {
           res.writeHead(up.statusCode, up.headers);
@@ -208,7 +216,7 @@ function qrText(text) {
   return out;
 }
 
-const VERSION = '0.1.0';
+const VERSION = '0.1.1';
 
 const USAGE = `Usage: phonepeek [port]
 

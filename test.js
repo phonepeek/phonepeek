@@ -12,6 +12,12 @@ test('forwards requests as localhost, rewrites localhost links, proxies websocke
       res.writeHead(307, { location: `http://localhost:${targetPort}/login?x=1` });
       return res.end();
     }
+    if (req.url === '/checkout') {
+      // Inertia full-page visit (Inertia::location / asset version change)
+      res.writeHead(409, { 'x-inertia-location': `http://localhost:${targetPort}/checkout`, link: [`<http://localhost:${targetPort}/a.js>; rel=preload`] });
+      return res.end();
+    }
+    if (req.url === '/referer') return res.end(req.headers.referer);
     if (req.url === '/html') {
       res.writeHead(200, { 'content-type': 'text/html; charset=utf-8' });
       return res.end(`<link href="http://localhost:${targetPort}/app.css"><script>{"u":"http:\\/\\/127.0.0.1:${targetPort}\\/x"}</script><a href="http://localhost:${targetPort}1">other port</a> ünïcode`);
@@ -33,6 +39,16 @@ test('forwards requests as localhost, rewrites localhost links, proxies websocke
 
   const r = await fetch(`http://127.0.0.1:${proxyPort}/redirect`, { redirect: 'manual' });
   assert.equal(r.headers.get('location'), `http://127.0.0.1:${proxyPort}/login?x=1`);
+
+  const inertia = await fetch(`http://127.0.0.1:${proxyPort}/checkout`);
+  assert.equal(inertia.status, 409);
+  assert.equal(inertia.headers.get('x-inertia-location'), `http://127.0.0.1:${proxyPort}/checkout`);
+  assert.equal(inertia.headers.get('link'), `<http://127.0.0.1:${proxyPort}/a.js>; rel=preload`);
+
+  const ref = await fetch(`http://127.0.0.1:${proxyPort}/referer`, { headers: { referer: `http://127.0.0.1:${proxyPort}/cart?x=1` } });
+  assert.equal(await ref.text(), `http://localhost:${targetPort}/cart?x=1`);
+  const ext = await fetch(`http://127.0.0.1:${proxyPort}/referer`, { headers: { referer: 'https://google.com/' } });
+  assert.equal(await ext.text(), 'https://google.com/');
 
   const html = await fetch(`http://127.0.0.1:${proxyPort}/html`);
   const body = await html.text();
