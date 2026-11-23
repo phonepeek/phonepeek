@@ -45,9 +45,17 @@ test('no SSRF: absolute URLs and CONNECT cannot reach other ports or hosts', asy
 });
 
 test('2000 idle connections do not block a normal request', async (t) => {
-  const { proxy, cookie } = await setup(t, { token: TOKEN, app });
-  const socks = Array.from({ length: 2000 }, () => net.connect(proxy, '127.0.0.1').on('error', () => {}));
+  const { proxy, proxyServer, cookie } = await setup(t, { token: TOKEN, app });
+  const socks = [];
   t.after(() => socks.forEach((s) => s.destroy()));
-  await new Promise((r) => setTimeout(r, 500));
+  // One after another: a burst of thousands at once is reset by the OS itself (macOS/Windows) before any
+  // program sees it, plain Node servers included. The claim is about connections phonepeek accepts and holds.
+  for (let i = 0; i < 2000; i++) {
+    const s = net.connect(proxy, '127.0.0.1');
+    socks.push(s);
+    await new Promise((resolve, reject) => { s.once('connect', resolve); s.once('error', reject); });
+  }
+  const accepted = () => new Promise((r) => proxyServer.getConnections((e, n) => r(n)));
+  while ((await accepted()) < 2000) await new Promise((r) => setTimeout(r, 20));
   assert.equal((await request(proxy, '/ok', { headers: { cookie } })).body, 'app:/ok');
 });

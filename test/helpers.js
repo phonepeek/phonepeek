@@ -20,7 +20,7 @@ async function setup(t, { app, upgrade, token, tls: tlsOpts } = {}) {
   const proxy = createProxy(ports.target, { token, tls: tlsOpts });
   ports.proxy = await listen(proxy, '127.0.0.1');
   t.after(() => { proxy.close(); target.close(); proxy.closeAllConnections(); target.closeAllConnections(); });
-  return { ...ports, seen, cookie: token ? `phonepeek_${ports.target}=${token}` : '' };
+  return { ...ports, seen, proxyServer: proxy, cookie: token ? `phonepeek_${ports.target}=${token}` : '' };
 }
 
 // Raw bytes over TCP/TLS (so tests can send anything, even invalid HTTP). Resolves with what came back.
