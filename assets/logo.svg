@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 512 512" role="img" aria-label="phonepeek logo">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0b1220"/><stop offset="1" stop-color="#13213d"/></linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#34d399"/><stop offset="1" stop-color="#22d3ee"/></linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#22d3ee" stop-opacity="0.22"/><stop offset="1" stop-color="#22d3ee" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="512" height="512" fill="url(#bg)"/>
+  <circle cx="256" cy="256" r="240" fill="url(#glow)"/>
+  <rect x="126" y="46" width="260" height="420" rx="58" fill="#0f172a" stroke="url(#accent)" stroke-width="28"/>
+  <rect x="221" y="74" width="70" height="18" rx="9" fill="url(#accent)"/>
+  <g fill="#f8fafc"><path fill-rule="evenodd" d="M173 118h76v76h-76z M187 132v48h48v-48z"/><rect x="199" y="144" width="24" height="24"/><path fill-rule="evenodd" d="M263 118h76v76h-76z M277 132v48h48v-48z"/><rect x="289" y="144" width="24" height="24"/><path fill-rule="evenodd" d="M173 208h76v76h-76z M187 222v48h48v-48z"/><rect x="199" y="234" width="24" height="24"/><rect x="263" y="208" width="24" height="24"/><rect x="315" y="208" width="24" height="24"/><rect x="289" y="234" width="24" height="24"/><rect x="263" y="260" width="24" height="24"/><rect x="315" y="260" width="24" height="24"/></g>
+  <rect x="173" y="318" width="166" height="22" rx="11" fill="url(#accent)"/>
+</svg>

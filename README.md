@@ -85,8 +85,13 @@ It's one short Markdown file: [read it](skills/phonepeek/SKILL.md) before adding
 
 ## How it works
 
-phonepeek starts a small proxy on your Wi-Fi address that forwards to `localhost:<port>`:
+<p align="center">
+  <img src="assets/how-it-works.svg" alt="Your phone connects over Wi-Fi to phonepeek on your computer, which passes requests to your dev server on localhost. Other devices on the Wi-Fi are blocked with 403 Forbidden." width="100%">
+</p>
 
+phonepeek starts a small proxy server (a go-between) on your computer's Wi-Fi address. Your phone talks to the proxy, and the proxy talks to your dev server on `localhost:<port>`, so your dev server doesn't need any changes:
+
+- **Only your phone gets in.** The QR code holds a private link that changes every run. Anyone else on the Wi-Fi gets `403 Forbidden` and never reaches your app.
 - **Works without server flags.** Requests are forwarded as if they came from `localhost`, so you don't need `--host 0.0.0.0`, and Next.js `allowedDevOrigins` / Vite `allowedHosts` checks don't block your phone.
 - **Absolute links are fixed.** URLs like `http://localhost:8000/app.css` (Laravel `APP_URL`, redirects, JSON) are rewritten to your computer's address. On a phone, `localhost` would mean the phone itself.
 - **Hot reload works.** WebSockets pass through.
