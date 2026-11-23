@@ -5,7 +5,7 @@ description: Open the user's local dev server on their phone with a QR code (pho
 
 # phonepeek
 
-[phonepeek](https://github.com/nkechr1s/phonepeek) shows a local dev server on a phone on the same Wi-Fi. It prints a QR code with a private link: only the browser that opens it gets in, so nothing else on the network can reach the app.
+[phonepeek](https://github.com/phonepeek/phonepeek) shows a local dev server on a phone on the same Wi-Fi. It prints a QR code with a private link: only the browser that opens it gets in, so nothing else on the network can reach the app.
 
 ## 1. Make sure it's installed
 
@@ -16,7 +16,7 @@ command -v phonepeek && phonepeek --version
 If it's missing, **ask the user before installing**, then use the verified installer (it installs from a tagged release only if the SHA-256 checksum matches):
 
 ```sh
-curl -fsSL https://github.com/nkechr1s/phonepeek/releases/latest/download/install.sh | sh
+curl -fsSL https://github.com/phonepeek/phonepeek/releases/latest/download/install.sh | sh
 ```
 
 It needs Node.js 20+. Don't install it any other way.

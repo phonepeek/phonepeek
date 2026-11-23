@@ -1,7 +1,9 @@
 # Changelog
 
-## Unreleased
+## 0.2.1
 
+- phonepeek moved to the **[phonepeek](https://github.com/phonepeek) organization**: [github.com/phonepeek/phonepeek](https://github.com/phonepeek/phonepeek). Old links redirect.
+- Releases are now built and signed by `phonepeek/phonepeek`. Verify with `gh attestation verify ~/.local/bin/phonepeek --repo phonepeek/phonepeek` (v0.2.0's build record names the old address).
 - `skills/phonepeek/SKILL.md`: a skill so AI coding agents (Claude Code and others) can run phonepeek for you.
 - `AGENTS.md` / `CLAUDE.md`: project rules for AI agents working on the repo.
 

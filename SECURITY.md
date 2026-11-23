@@ -29,4 +29,4 @@ Run them all with `node --test`.
 
 ## Reporting a vulnerability
 
-Please use GitHub's private [security advisory form](https://github.com/nkechr1s/phonepeek/security/advisories/new) instead of a public issue.
+Please use GitHub's private [security advisory form](https://github.com/phonepeek/phonepeek/security/advisories/new) instead of a public issue.

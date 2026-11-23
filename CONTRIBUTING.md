@@ -3,7 +3,7 @@
 Thanks for helping! phonepeek has two rules: **one file** (`phonepeek.js`) and **zero dependencies**. That's what keeps it easy to read and verify.
 
 ```sh
-git clone https://github.com/nkechr1s/phonepeek
+git clone https://github.com/phonepeek/phonepeek
 cd phonepeek
 node --test             # all tests
 node phonepeek.js 8000  # try it on a local server

@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/nkechr1s/phonepeek/actions/workflows/ci.yml"><img src="https://github.com/nkechr1s/phonepeek/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <a href="https://github.com/phonepeek/phonepeek/actions/workflows/ci.yml"><img src="https://github.com/phonepeek/phonepeek/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT license"></a>
   <img src="https://img.shields.io/badge/dependencies-0-brightgreen.svg" alt="zero dependencies">
   <img src="https://img.shields.io/badge/node-%E2%89%A520-green.svg" alt="Node 20+">
@@ -24,40 +24,40 @@ Testing a site on a real phone usually means deploying it or fiddling with `--ho
 ## Install
 
 ```sh
-curl -fsSL https://github.com/nkechr1s/phonepeek/releases/latest/download/install.sh | sh
+curl -fsSL https://github.com/phonepeek/phonepeek/releases/latest/download/install.sh | sh
 ```
 
-Needs Node.js 20+. Installs one file to `~/.local/bin/phonepeek` (override with `PHONEPEEK_DIR`), only from a [tagged release](https://github.com/nkechr1s/phonepeek/releases), and only if its SHA-256 checksum matches. Pin a version with `PHONEPEEK_VERSION=v0.2.0`.
+Needs Node.js 20+. Installs one file to `~/.local/bin/phonepeek` (override with `PHONEPEEK_DIR`), only from a [tagged release](https://github.com/phonepeek/phonepeek/releases), and only if its SHA-256 checksum matches. Pin a version with `PHONEPEEK_VERSION=v0.2.0`.
 
 Prefer to look first? Download, read, then run:
 
 ```sh
-curl -fsSLO https://github.com/nkechr1s/phonepeek/releases/latest/download/install.sh
+curl -fsSLO https://github.com/phonepeek/phonepeek/releases/latest/download/install.sh
 less install.sh && sh install.sh
 ```
 
-**Windows:** download `phonepeek.js` from the [latest release](https://github.com/nkechr1s/phonepeek/releases/latest) and run `node phonepeek.js 8000`.
+**Windows:** download `phonepeek.js` from the [latest release](https://github.com/phonepeek/phonepeek/releases/latest) and run `node phonepeek.js 8000`.
 
 **Update:** run the install command again. **Uninstall:** `rm ~/.local/bin/phonepeek` (and `rm -r ~/.phonepeek` for HTTPS certificates).
 
 ## Official source
 
-This repository, **[github.com/nkechr1s/phonepeek](https://github.com/nkechr1s/phonepeek)**, is the original and only official phonepeek. Official versions come only from:
+This repository, **[github.com/phonepeek/phonepeek](https://github.com/phonepeek/phonepeek)**, is the original and only official phonepeek. Official versions come only from:
 
-- the install command above, which downloads from this repository's [releases](https://github.com/nkechr1s/phonepeek/releases)
-- the [releases page](https://github.com/nkechr1s/phonepeek/releases) itself
+- the install command above, which downloads from this repository's [releases](https://github.com/phonepeek/phonepeek/releases)
+- the [releases page](https://github.com/phonepeek/phonepeek/releases) itself
 
 phonepeek is **not on npm yet**, nor on Homebrew, PyPI or any other package manager, app store or website. A "phonepeek" from anywhere else is not ours, even if its code or README looks identical, and it may contain malicious software.
 
 **Check that your copy is genuine.** Every official release is built by GitHub from this repository and carries a signed build record that a copy cannot fake:
 
 ```sh
-gh attestation verify ~/.local/bin/phonepeek --repo nkechr1s/phonepeek
+gh attestation verify ~/.local/bin/phonepeek --repo phonepeek/phonepeek
 ```
 
 If this fails, delete that copy and install from the command above.
 
-Found a copy pretending to be phonepeek? Please [report it privately](https://github.com/nkechr1s/phonepeek/security/advisories/new).
+Found a copy pretending to be phonepeek? Please [report it privately](https://github.com/phonepeek/phonepeek/security/advisories/new).
 
 ## Usage
 
@@ -78,7 +78,7 @@ Add the phonepeek skill, and Claude Code (or any agent that supports [skills](sk
 
 ```sh
 mkdir -p ~/.claude/skills/phonepeek
-curl -fsSL https://raw.githubusercontent.com/nkechr1s/phonepeek/main/skills/phonepeek/SKILL.md -o ~/.claude/skills/phonepeek/SKILL.md
+curl -fsSL https://raw.githubusercontent.com/phonepeek/phonepeek/main/skills/phonepeek/SKILL.md -o ~/.claude/skills/phonepeek/SKILL.md
 ```
 
 It's one short Markdown file: [read it](skills/phonepeek/SKILL.md) before adding it.
@@ -132,7 +132,7 @@ You can skip installing it and tap through the "not private" warning instead, bu
 
 ## Is it safe?
 
-Don't take our word for it. Every claim below is checked by an automated test that runs on Linux, macOS and Windows for every change ([CI](https://github.com/nkechr1s/phonepeek/actions/workflows/ci.yml)).
+Don't take our word for it. Every claim below is checked by an automated test that runs on Linux, macOS and Windows for every change ([CI](https://github.com/phonepeek/phonepeek/actions/workflows/ci.yml)).
 
 | Claim | Proof |
 |---|---|
@@ -151,7 +151,7 @@ And things you can check yourself in a minute:
 - **Releases are built by GitHub, not on someone's laptop.** Each release is built from a tagged commit by [this workflow](.github/workflows/release.yml), after all tests pass, with a signed [build provenance attestation](https://docs.github.com/actions/security-guides/using-artifact-attestations). Verify your copy:
 
   ```sh
-  gh attestation verify ~/.local/bin/phonepeek --repo nkechr1s/phonepeek
+  gh attestation verify ~/.local/bin/phonepeek --repo phonepeek/phonepeek
   ```
 
 Details, known limits and how to report a vulnerability: [SECURITY.md](SECURITY.md).

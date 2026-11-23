@@ -1,11 +1,11 @@
 #!/bin/sh
 # Install phonepeek from a GitHub release. The SHA-256 checksum is verified before anything is installed.
-#   curl -fsSL https://github.com/nkechr1s/phonepeek/releases/latest/download/install.sh | sh
+#   curl -fsSL https://github.com/phonepeek/phonepeek/releases/latest/download/install.sh | sh
 # Pin a version:
-#   curl -fsSL https://github.com/nkechr1s/phonepeek/releases/download/v0.2.0/install.sh | PHONEPEEK_VERSION=v0.2.0 sh
+#   curl -fsSL https://github.com/phonepeek/phonepeek/releases/download/v0.2.0/install.sh | PHONEPEEK_VERSION=v0.2.0 sh
 set -eu
 
-REPO="nkechr1s/phonepeek"
+REPO="phonepeek/phonepeek"
 DIR="${PHONEPEEK_DIR:-$HOME/.local/bin}"
 VERSION="${PHONEPEEK_VERSION:-latest}"
 if [ "$VERSION" = latest ]; then
