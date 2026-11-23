@@ -1,6 +1,32 @@
-# phonepeek
+<h1 align="center">phonepeek</h1>
 
-See your localhost on your phone in one command. No deploy, no account, no config. Any project: Next.js, Vite, Laravel, Django, Rails, PHP, a static folder, anything on a local port.
+<p align="center">
+  <b>See your localhost on your phone in one command.</b><br>
+  Scan a QR code. No deploy, no account, no config, no dependencies.
+</p>
+
+<p align="center">
+  <a href="https://github.com/nkechr1s/phonepeek/actions/workflows/ci.yml"><img src="https://github.com/nkechr1s/phonepeek/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT license"></a>
+  <img src="https://img.shields.io/badge/dependencies-0-brightgreen.svg" alt="zero dependencies">
+  <img src="https://img.shields.io/badge/node-%E2%89%A520-green.svg" alt="Node 20+">
+</p>
+
+```console
+$ phonepeek 8000
+
+  localhost:8000  ->  http://192.168.1.23:8000
+
+  █▀▀▀▀▀█ ▀▄ ▄█ █▀▀▀▀▀█
+  █ ███ █ ▄▀█▄▀ █ ███ █      <- scan with your phone camera
+  █▄▄▄▄▄█ █ ▀ █ █▄▄▄▄▄█
+
+  Scan with your phone camera (same Wi-Fi). Ctrl+C to stop.
+```
+
+## Why
+
+Testing a site on a real phone usually means deploying it or fiddling with `--host 0.0.0.0`, firewall settings and "invalid host" errors. phonepeek does it in one command, and works with **any** project that serves on a local port: Next.js, Vite, Astro, Remix, Laravel, Django, Rails, PHP, or a plain static folder.
 
 ## Install
 
@@ -8,65 +34,68 @@ See your localhost on your phone in one command. No deploy, no account, no confi
 curl -fsSL https://raw.githubusercontent.com/nkechr1s/phonepeek/main/install.sh | sh
 ```
 
-One file, no dependencies, just Node.js 20+. Or try it without installing:
+Needs Node.js 20+. It's a single file, installed to `~/.local/bin/phonepeek` (override with `PHONEPEEK_DIR`).
+
+Or run it once without installing:
 
 ```sh
 curl -fsSL https://raw.githubusercontent.com/nkechr1s/phonepeek/main/phonepeek.js | node - 8000
 ```
 
-## Use
+**Windows:** download `phonepeek.js` and run `node phonepeek.js 8000`.
+
+**Update:** run the install command again. **Uninstall:** `rm ~/.local/bin/phonepeek`.
+
+## Usage
 
 ```sh
-phonepeek          # finds your running dev server
+phonepeek          # auto-detects your running dev server
 phonepeek 8000     # or name the port
+phonepeek --help
 ```
 
-It prints a QR code. Scan it with your phone camera and your site opens, with hot reload working.
-
-```
-  localhost:8000  ->  http://192.168.1.23:8000
-
-  ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-  ...
-  Scan with your phone camera (same Wi-Fi). Ctrl+C to stop.
-```
-
-Your phone and computer must be on the **same Wi-Fi**.
+Start your dev server as usual, run phonepeek, scan the code. Your phone and computer must be on the **same Wi-Fi**.
 
 ## How it works
 
-It starts a tiny proxy on your Wi-Fi address that forwards to `localhost:<port>`:
+phonepeek starts a small proxy on your Wi-Fi address that forwards to `localhost:<port>`:
 
-- Requests look like they came from `localhost`, so you don't need `--host 0.0.0.0`, and Next.js `allowedDevOrigins`, Vite `allowedHosts` and similar checks don't block your phone.
-- Links your app writes as `http://localhost:<port>/...` (CSS, JS, images, redirects, e.g. Laravel's `APP_URL`) are rewritten to the phone's address, so nothing points at "localhost" on the phone.
-- Hot reload (websockets) passes through.
-- The phone URL uses the same port as your app when it can.
-
-Without a port it looks for a server on 3000, 3001, 4200, 4321, 5173, 5500, 8000, 8080, 8081 and uses the first one it finds.
+- **Works without server flags.** Requests are forwarded as if they came from `localhost`, so you don't need `--host 0.0.0.0`, and Next.js `allowedDevOrigins` / Vite `allowedHosts` checks don't block your phone.
+- **Absolute links are fixed.** URLs like `http://localhost:8000/app.css` (Laravel `APP_URL`, redirects, JSON) are rewritten to your computer's address. On a phone, `localhost` would mean the phone itself.
+- **Hot reload works.** WebSockets pass through.
+- **Same port.** The phone URL uses your app's port when it's free.
+- **Auto-detect.** With no port, it probes 3000, 3001, 4200, 4321, 5173, 5500, 8000, 8080 and 8081.
 
 ## Troubleshooting
 
-- **Phone can't load the page**: macOS may ask "Allow incoming connections" for `node`. Click Allow. On Windows, allow Node in the firewall prompt.
-- **Still nothing**: some public/office Wi-Fi blocks devices from talking to each other. Try your phone's hotspot with the computer connected to it.
-- **"Nothing is answering on localhost:8000"**: start your dev server first, or pass the right port.
+| Problem | Fix |
+|---|---|
+| Phone can't load the page | Allow incoming connections for `node` when macOS / Windows asks. |
+| Still nothing | Public or office Wi-Fi often blocks device-to-device traffic. Use your phone's hotspot. |
+| "Nothing is answering on localhost:8000" | Start your dev server first, or pass the right port. |
+| Wrong network IP shown | Another adapter (VPN, Docker) was picked. Disconnect it and retry. |
 
-## Limits
+## Limitations
 
-- Same network only (not a public tunnel; for that use `cloudflared tunnel --url localhost:8000`).
-- Plain `http`, so browser features that need HTTPS (camera, service workers, some auth providers) won't work from the phone.
-- Pages are sent to the phone once fully loaded (no streaming of HTML), so links inside them can be rewritten.
+- Same network only. For a public link use a tunnel such as `cloudflared tunnel --url localhost:8000`.
+- Plain `http`, so features needing HTTPS (camera, service workers, some OAuth providers) won't work on the phone.
+- Text responses are buffered so links can be rewritten; streamed HTML shows up all at once.
+- While running, anyone on your Wi-Fi can open the URL. See [SECURITY.md](SECURITY.md).
 
-## Windows
+## Roadmap
 
-The installer needs a Unix shell. On Windows, download `phonepeek.js` and run `node phonepeek.js 8000`.
+Ideas open for contribution (see [CONTRIBUTING.md](CONTRIBUTING.md)):
 
-## Develop
+- [ ] Choose between multiple detected servers interactively
+- [ ] Pick the network interface (`--ip`)
+- [ ] Optional HTTPS with a local certificate
+- [ ] Smarter handling of streamed responses
+- [ ] Homebrew formula
 
-```sh
-node --test test.js
-node phonepeek.js 8000
-```
+## Contributing
+
+Two rules: one file, zero dependencies. Run tests with `node --test test.js`. Issues and PRs welcome; if phonepeek saved you a deploy, a ⭐ helps others find it.
 
 ## License
 
-MIT
+[MIT](LICENSE)

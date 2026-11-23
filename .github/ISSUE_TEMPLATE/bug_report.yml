@@ -1,0 +1,16 @@
+name: Bug report
+description: Something doesn't work (page won't load on the phone, broken styles, etc.)
+labels: [bug]
+body:
+  - type: input
+    id: framework
+    attributes: { label: Framework / dev server, placeholder: "Next.js 15, Vite, Laravel, Django..." }
+    validations: { required: true }
+  - type: input
+    id: env
+    attributes: { label: OS, Node version, phone, placeholder: "macOS 15, Node 22, iPhone Safari" }
+    validations: { required: true }
+  - type: textarea
+    id: what
+    attributes: { label: What happened, description: "What you expected vs. what you saw. Paste the terminal output." }
+    validations: { required: true }

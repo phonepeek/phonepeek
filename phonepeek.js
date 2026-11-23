@@ -208,13 +208,20 @@ function qrText(text) {
   return out;
 }
 
+const VERSION = '0.1.0';
+
 const USAGE = `Usage: phonepeek [port]
 
 Open your localhost on your phone: scan the QR code (phone on the same Wi-Fi).
-  port   port your dev server runs on (found automatically if left out)`;
+  port   port your dev server runs on (found automatically if left out)
+
+Options:
+  -h, --help      show this help
+  -v, --version   show the version`;
 
 async function main(arg) {
   if (arg === '-h' || arg === '--help') return console.log(USAGE);
+  if (arg === '-v' || arg === '--version') return console.log(VERSION);
   let target = Number(arg);
   if (arg === undefined) {
     const found = await findDevServers();
