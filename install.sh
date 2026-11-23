@@ -1,7 +1,7 @@
 #!/bin/sh
-# Installs phonepeek: curl -fsSL https://raw.githubusercontent.com/nkechr1s/live-preview/main/install.sh | sh
+# Installs phonepeek: curl -fsSL https://raw.githubusercontent.com/nkechr1s/phonepeek/main/install.sh | sh
 set -e
-REPO="${PHONEPEEK_REPO:-nkechr1s/live-preview}"
+REPO="${PHONEPEEK_REPO:-nkechr1s/phonepeek}"
 DIR="${PHONEPEEK_DIR:-$HOME/.local/bin}"
 
 command -v node >/dev/null 2>&1 || { echo "phonepeek needs Node.js 20+ (https://nodejs.org)"; exit 1; }

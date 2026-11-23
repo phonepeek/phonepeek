@@ -5,13 +5,13 @@ See your localhost on your phone in one command. No deploy, no account, no confi
 ## Install
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/nkechr1s/live-preview/main/install.sh | sh
+curl -fsSL https://raw.githubusercontent.com/nkechr1s/phonepeek/main/install.sh | sh
 ```
 
 One file, no dependencies, just Node.js 20+. Or try it without installing:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/nkechr1s/live-preview/main/phonepeek.js | node - 8000
+curl -fsSL https://raw.githubusercontent.com/nkechr1s/phonepeek/main/phonepeek.js | node - 8000
 ```
 
 ## Use
