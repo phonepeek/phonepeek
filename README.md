@@ -5,8 +5,9 @@
 <h1 align="center">phonepeek</h1>
 
 <p align="center">
-  <b>See your localhost on your phone in one command.</b><br>
-  Scan a QR code. No deploy, no account, no config, no dependencies.
+  <b>See your localhost on your phone in one command. Security first.</b><br>
+  Scan a QR code. Private to your phone, never on the internet.<br>
+  No deploy, no account, no config, no dependencies.
 </p>
 
 <p align="center">
@@ -17,9 +18,34 @@
 </p>
 
 
-## Why
+## Why phonepeek
 
-Testing a site on a real phone usually means deploying it or fiddling with `--host 0.0.0.0`, firewall settings and "invalid host" errors. phonepeek does it in one command, and works with **any** project that serves on a local port: Next.js, Vite, Astro, Remix, Laravel, Django, Rails, PHP, or a plain static folder.
+Testing a site on a real phone usually means deploying it, or putting your unfinished app on the public internet through a tunnel, or fiddling with `--host 0.0.0.0`, firewall settings and "invalid host" errors.
+
+phonepeek takes the opposite approach: **your app stays on your Wi-Fi, and only your phone can open it.**
+
+- **Nothing on the internet.** No account, no cloud, no third-party servers. Your code and data never leave your network, and it works even with no internet connection.
+- **Same Wi-Fi, that's all.** Your phone and computer just need to be on the same network.
+- **Scan, don't type.** A QR code opens the app. No IP addresses to copy.
+- **Private by default.** Each run creates a secret link. Anyone else on the Wi-Fi gets `403 Forbidden` and never reaches your app.
+- **No framework changes.** A built-in proxy makes your phone look like `localhost` to your dev server, so there's no `--host` flag and no allowed-hosts config to edit.
+- **Real HTTPS when you need it.** `--https` makes Stripe checkout, the camera and other secure-only features work, using a certificate that can't be misused for real websites.
+
+Works with **any** project that serves on a local port: Next.js, Vite, Astro, Remix, Laravel, Django, Rails, PHP, or a plain static folder.
+
+### Compared with the usual options
+
+| | **phonepeek** | Public tunnel<br>(ngrok, cloudflared, …) | `--host 0.0.0.0` |
+|---|---|---|---|
+| Who can reach your app | **Only your phone** (private link) | Anyone on the internet with the URL | Everyone on your Wi-Fi |
+| Traffic goes through a third party | **No** | Yes | No |
+| Account needed | **No** | Often | No |
+| Works without internet | **Yes** | No | Yes |
+| Framework config changes | **None** | Sometimes (allowed hosts) | Yes (host flags, allowed hosts) |
+| Open it on the phone | **Scan a QR code** | Type or copy a URL | Type an IP address |
+| HTTPS | **Yes** (`--https`) | Yes | Only with extra setup |
+
+A tunnel is the right tool when someone **outside** your network needs to see your app. For testing on your own phone, phonepeek keeps it private.
 
 ## Install
 
